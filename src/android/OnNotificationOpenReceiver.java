@@ -13,6 +13,11 @@ public class OnNotificationOpenReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         PackageManager pm = context.getPackageManager();
 
+        Intent it = new Intent("intent.my.action");
+        it.setComponent(new ComponentName(context.getPackageName(), MainActivity.class.getName()));
+        it.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.getApplicationContext().startActivity(it);
+
         Intent launchIntent = pm.getLaunchIntentForPackage(context.getPackageName());
         launchIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
 
